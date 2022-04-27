@@ -5,7 +5,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public void addEmployee(Employee emp) {
-		// employeeMap.put(emp.getId(), emp);
 		System.out.print(emp);
 	}
 
@@ -52,7 +51,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 
 			boolean status = false;
-			System.out.println("edit"+toEdit);
 			if (employeeDao.atualizarUsuario(toEdit) == true) {
 				status = true;
 			}
