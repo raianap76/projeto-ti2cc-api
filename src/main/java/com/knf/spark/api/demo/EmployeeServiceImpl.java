@@ -53,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 			boolean status = false;
 			System.out.println("edit"+toEdit);
-			if (employeeDao.atualizarUsuario(forEdit) == true) {
+			if (employeeDao.atualizarUsuario(toEdit) == true) {
 				status = true;
 			}
 			return status;
