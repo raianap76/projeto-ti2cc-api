@@ -98,12 +98,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 				return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(forEdit)));
 			} else {
 				return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
-						new Gson().toJson("Usuario não encontrado , preencha todos os campos!")));
+						new Gson().toJson("Erro ao atualizar, preencha todos os campos!")));
 			}
 
 		} catch (Exception ex) {
-
-			throw new EmployeeException(ex.getMessage());
+			return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
+					new Gson().toJson("Erro ao  atualizar , preencha todos os campos!")));
 		}
 	}
 
