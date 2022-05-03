@@ -115,6 +115,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			response.header("Access-Control-Allow-Methods", "GET");
 			response.header("Access-Control-Allow-Headers",
 					"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+			
 			employeeDao.delete(request.params(":id"));
 			return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, "usuario deletado com sucesso"));
 		} catch (Exception ex) {
