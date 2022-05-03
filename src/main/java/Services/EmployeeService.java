@@ -2,17 +2,19 @@ package Services;
 
 import Erros.EmployeeException;
 import model.Employee;
+import spark.Request;
+import spark.Response;
 
 public interface EmployeeService {
 	public void addEmployee(Employee employee);
-	public boolean addEmployeeBanco(Employee employee);
-	public Employee[] getEmployees();
+	public String addEmployeeBanco(Request request, Response response);
+	public String getEmployees(Request request, Response response);
 
-	public Employee getEmployee(String id);
+	public String getEmployee(Request request, Response response);
 
-	public boolean editEmployee(Employee employee) throws EmployeeException;
+	public String editEmployee(Request request, Response response) throws EmployeeException;
 
-	public void deleteEmployee(String id);
+	public String deleteEmployee(Request request, Response response);
 
 	public boolean employeeExist(String id);
 }

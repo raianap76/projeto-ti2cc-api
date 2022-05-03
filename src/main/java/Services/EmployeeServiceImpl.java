@@ -1,8 +1,14 @@
 package Services;
 
+import com.google.gson.Gson;
+
 import DAO.EmployeeDAO;
 import Erros.EmployeeException;
 import model.Employee;
+import response.StandardResponse;
+import response.StatusResponse;
+import spark.Request;
+import spark.Response;
 
 public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeDAO employeeDao = new EmployeeDAO();
@@ -13,36 +19,70 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public boolean addEmployeeBanco(Employee emp) {
-		Employee employee = new Employee(emp.getId(), emp.getFirstName(), emp.getLastName(), emp.getEmail());
-		boolean status = false;
-		if (employeeDao.insert(employee) == true) {
-			status = true;
+	public String addEmployeeBanco(Request request, Response response) {
+		// Employee employee = new Employee(emp.getId(), emp.getFirstName(),
+		// emp.getLastName(), emp.getEmail());
+		response.type("application/json");
+		response.header("Access-Control-Allow-Origin", "*");
+		response.header("Access-Control-Allow-Methods", "POST");
+		response.header("Access-Control-Allow-Headers",
+				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+
+		Employee employee = new Gson().fromJson(request.body(), Employee.class);
+		boolean status = employeeDao.insert(employee);
+		if (status == true) {
+			return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, "Adicionado com sucesso"));
+		} else {
+			return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
+					new Gson().toJson("Erro ao inserir o  usuario na tabela de dados")));
 		}
-		return status;
 	}
 
 	@Override
-	public Employee[] getEmployees() {
-		return employeeDao.getEmployee();
+	public String getEmployees(Request request, Response response) {
+		response.type("application/json");
+		response.header("Access-Control-Allow-Origin", "*");
+		response.header("Access-Control-Allow-Methods", "GET");
+		response.header("Access-Control-Allow-Headers",
+				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+		return new Gson()
+				.toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(employeeDao.getEmployee())));
 
 	}
 
 	@Override
-	public Employee getEmployee(String id) {
-		return employeeDao.get(id);
+	public String getEmployee(Request request, Response response) {
+		response.type("application/json");
+		response.header("Access-Control-Allow-Origin", "*");
+		response.header("Access-Control-Allow-Methods", "GET");
+		response.header("Access-Control-Allow-Headers",
+				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+
+		return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS,
+				new Gson().toJsonTree(employeeDao.get(request.params(":id")))));
+
 	}
 
 	@Override
-	public boolean editEmployee(Employee forEdit) throws EmployeeException {
+	public String editEmployee(Request request, Response response) throws EmployeeException {
+		response.type("application/json");
+		response.header("Access-Control-Allow-Origin", "*");
+		response.header("Access-Control-Allow-Methods", "GET");
+		response.header("Access-Control-Allow-Headers",
+				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+
+		Employee forEdit = new Gson().fromJson(request.body(), Employee.class);
+
 		try {
 			if (forEdit.getId() == null)
-				return false;
+				return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
+						new Gson().toJson("Usuario não encontrado , preencha todos os campos!")));
 
 			Employee toEdit = employeeDao.get(forEdit.getId());
 
 			if (toEdit == null)
-				return false;
+				return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
+						new Gson().toJson("Usuario não encontrado , preencha todos os campos!")));
 
 			if (forEdit.getEmail() != null) {
 				toEdit.setEmail(forEdit.getEmail());
@@ -54,20 +94,34 @@ public class EmployeeServiceImpl implements EmployeeService {
 				toEdit.setLastName(forEdit.getLastName());
 			}
 
-			boolean status = false;
 			if (employeeDao.atualizarUsuario(toEdit) == true) {
-				status = true;
+				return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(forEdit)));
+			} else {
+				return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
+						new Gson().toJson("Usuario não encontrado , preencha todos os campos!")));
 			}
-			return status;
+
 		} catch (Exception ex) {
-		
+
 			throw new EmployeeException(ex.getMessage());
 		}
 	}
 
 	@Override
-	public void deleteEmployee(String id) {
-		employeeDao.delete(id);
+	public String deleteEmployee(Request request, Response response) {
+		try {
+			response.type("application/json");
+			response.header("Access-Control-Allow-Origin", "*");
+			response.header("Access-Control-Allow-Methods", "GET");
+			response.header("Access-Control-Allow-Headers",
+					"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+			employeeDao.delete(request.params(":id"));
+			return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, "usuario deletado com sucesso"));
+		} catch (Exception ex) {
+			return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
+					new Gson().toJson("Erro ao deletar , usuario não existe na base!")));
+		}
+
 	}
 
 	@Override
