@@ -1,4 +1,4 @@
-package Erros;
+package error;
 
 public class EmployeeException extends Exception {
 

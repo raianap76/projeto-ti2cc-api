@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +11,9 @@ import model.Employee;
 
 
 
-public class EmployeeDAO extends DAO {	
+public class UsuarioDAO extends DAO {	
 	
-	public EmployeeDAO() {
+	public UsuarioDAO() {
 		super();
 		conectar();
 	}

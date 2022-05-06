@@ -1,13 +1,13 @@
 package model;
 
-public class Employee {
+public class Usuario {
 
 	private String id;
 	private String firstName;
 	private String lastName;
 	private String email;
 
-	public Employee(String id, String firstName, String lastName, String email) {
+	public Usuario(String id, String firstName, String lastName, String email) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
