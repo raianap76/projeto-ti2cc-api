@@ -2,11 +2,11 @@ package model;
 
 public class Usuario {
 
-	private String user_id;
+	private Integer user_id;
 	private String tipo_usuario;
 	private String senha;
 
-	public Usuario(String user_id, String tipo_usuario, String senha) {
+	public Usuario(Integer user_id, String tipo_usuario, String senha) {
 		super();
 		this.user_id = user_id;
 		this.tipo_usuario = tipo_usuario;
@@ -14,11 +14,11 @@ public class Usuario {
 
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return user_id;
 	}
 
-	public void setUserId(String user_id) {
+	public void setUserId(Integer user_id) {
 		this.user_id = user_id;
 	}
 

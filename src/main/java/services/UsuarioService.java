@@ -3,7 +3,7 @@ package services;
 import com.google.gson.Gson;
 
 import dao.UsuarioDAO;
-import error.EmployeeException;
+import error.UsuarioException;
 import model.Usuario;
 import response.StandardResponse;
 import response.StatusResponse;
@@ -55,11 +55,11 @@ public class UsuarioService {
 				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
 
 		return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS,
-				new Gson().toJsonTree(usuarioDao.get(request.params(":id")))));
+				new Gson().toJsonTree(usuarioDao.get(Integer.parseInt(request.params(":id"))))));
 
 	}
 
-	public String editUsuario(Request request, Response response) throws EmployeeException {
+	public String editUsuario(Request request, Response response) throws UsuarioException {
 		response.type("application/json");
 		response.header("Access-Control-Allow-Origin", "*");
 		response.header("Access-Control-Allow-Methods", "GET");
@@ -70,7 +70,7 @@ public class UsuarioService {
 
 		try {
 
-			Usuario toEdit = usuarioDao.get((request.params(":id")));
+			Usuario toEdit = usuarioDao.get(Integer.parseInt((request.params(":id"))));
 
 			if (toEdit == null)
 				return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
@@ -104,7 +104,7 @@ public class UsuarioService {
 		response.header("Access-Control-Allow-Headers",
 				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
 
-		boolean delete = usuarioDao.delete(request.params(":id"));
+		boolean delete = usuarioDao.delete(Integer.parseInt(request.params(":id")));
 		if (delete) {
 			return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, "usuario deletado com sucesso"));
 		} else {
