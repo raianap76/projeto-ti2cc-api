@@ -2,49 +2,39 @@ package model;
 
 public class Usuario {
 
-	private String id;
-	private String firstName;
-	private String lastName;
-	private String email;
+	private String user_id;
+	private String tipo_usuario;
+	private String senha;
 
-	public Usuario(String id, String firstName, String lastName, String email) {
+	public Usuario(String user_id, String tipo_usuario, String senha) {
 		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
+		this.user_id = user_id;
+		this.tipo_usuario = tipo_usuario;
+		this.senha = senha;
+
 	}
 
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return user_id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String user_id) {
+		this.user_id = user_id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getTipoUsuario() {
+		return tipo_usuario;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setTipoUsuario(String tipo_usuario) {
+		this.tipo_usuario = tipo_usuario;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 }

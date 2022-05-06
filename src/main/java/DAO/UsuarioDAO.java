@@ -1,10 +1,9 @@
 package dao;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import model.Employee;
+import model.Usuario;
 
 
 
@@ -24,14 +23,14 @@ public class UsuarioDAO extends DAO {
 	}
 	
 	
-	public boolean insert(Employee employee) {
+	public boolean insert(Usuario usuario) {
 		boolean status = false;
 		System.out.println("ele entra sim");
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("INSERT INTO employee.employee (id, firstname, lastname, email) "
-		               + "VALUES ("+employee.getId()+ ", '" + employee.getFirstName() + "', '"  
-				       + employee.getLastName() + "', '" + employee.getEmail() + "');");
+			st.executeUpdate("INSERT INTO usuario.usuario (user_id, tipo_usuario, senha) "
+		               + "VALUES ("+usuario.getUserId()+ ", '" + usuario.getTipoUsuario() + "', '"  
+				       + usuario.getSenha() + "', );");
 		  //  st.setTimestamp(1, Timestamp.valueOf(employee.firstName()));
 			//st.setDate(2, Date.valueOf(employee.firstName()));
 			//st.executeUpdate();
@@ -46,52 +45,52 @@ public class UsuarioDAO extends DAO {
 		return status;
 	}
 
-	public Employee[] getEmployee() {
-		Employee[] employee = null;
+	public Usuario[] getUsuario() {
+		Usuario[] usuario = null;
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = st.executeQuery("SELECT * FROM employee.employee");		
+			ResultSet rs = st.executeQuery("SELECT * FROM usuario.usuario");		
 	         if(rs.next()){
 	             rs.last();
-	             employee = new Employee[rs.getRow()];
+	             usuario = new Usuario[rs.getRow()];
 	             rs.beforeFirst();
 
 	             for(int i = 0; rs.next(); i++) {
-	            	 employee[i] = new Employee(rs.getString("id"), rs.getString("firstname"), 
-	                		                  rs.getString("lastname"), rs.getString("email"));
+	            	 usuario[i] = new Usuario(rs.getString("user_id"), rs.getString("tipo_usuario"), 
+	                		                  rs.getString("senha"));
 	             }
 	          }
 	          st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return employee;
+		return usuario;
 	}
-	public Employee get(String id) {
-		Employee employee = null;
+	public Usuario get(String id) {
+		Usuario usuario = null;
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM employee.employee WHERE id="+id;
+			String sql = "SELECT * FROM usuario.usuario WHERE id="+id;
 			ResultSet rs = st.executeQuery(sql);	
 	        if(rs.next()){            
-	        	employee = new Employee(rs.getString("id"), rs.getString("firstname"), 
-		                  rs.getString("lastname"), rs.getString("email"));
+	        	usuario = new Usuario(rs.getString("user_id"), rs.getString("tipo_usuario"), 
+		                  rs.getString("senha"));
 	        }
 	        st.close();
 		} catch (Exception e) {
 			System.out.println("execao get " +e);
 			System.err.println(e.getMessage());
 		}
-		return employee;
+		return usuario;
 	}
 	
-	public boolean delete(String id) {
+	public boolean delete(String user_id) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM employee.employee WHERE id = " + id);
+			st.executeUpdate("DELETE FROM usuario.usuario WHERE id = " + user_id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {  
@@ -99,13 +98,12 @@ public class UsuarioDAO extends DAO {
 		}
 		return status;
 	}
-	public boolean atualizarUsuario(Employee employee) {
+	public boolean atualizarUsuario(Usuario usuario) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			String sql = "UPDATE employee.employee SET firstname = '" + employee.getFirstName() + "', lastname = '"  
-				       + employee.getLastName() + "', email = '" + employee.getEmail() + "'"
-					   + " WHERE id = " + employee.getId();
+			String sql = "UPDATE usuario.usuario SET senha = '" + usuario.getSenha() + "', tipoUsuario = '"  
+				       + usuario.getTipoUsuario() + "', email = '" + " WHERE id = " + usuario.getUserId();
 			st.executeUpdate(sql);
 			System.out.println("atualizado com sucesso " +st);
 			st.close();

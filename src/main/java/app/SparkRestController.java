@@ -7,33 +7,33 @@ import static spark.Spark.post;
 import static spark.Spark.put;
 import static spark.Spark.staticFiles;
 
-import services.EmployeeService;
+import services.UsuarioService;
 
 
 public class SparkRestController {
 	public static void main(String[] args) {
 
-		final EmployeeService employeeService = new EmployeeService();
+		final UsuarioService usuarioService = new UsuarioService();
 		port(6787);
 		staticFiles.location("/public");
-		post("/employees", (request, response) -> {
-			return employeeService.addEmployeeBanco(request, response);
+		post("/usuario", (request, response) -> {
+			return usuarioService.addUsuario(request, response);
 		});
 
-		get("/employees", (request, response) -> {
-			return employeeService.getEmployees(request, response);
+		get("/usuario", (request, response) -> {
+			return usuarioService.getUsuarios(request, response);
 		});
 
-		get("/employees/:id", (request, response) -> {
-            return employeeService.getEmployee(request, response);
+		get("/usuario/:id", (request, response) -> {
+            return usuarioService.getUsuario(request, response);
 		});
 
-		put("/employees/:id", (request, response) -> {
-            return employeeService.editEmployee(request, response);
+		put("/usuario/:id", (request, response) -> {
+            return usuarioService.editUsuario(request, response);
 		});
 
-		delete("/employees/:id", (request, response) -> {
-			return employeeService.deleteEmployee(request, response);
+		delete("/usuario/:id", (request, response) -> {
+			return usuarioService.deleteUsuario(request, response);
 		});
 
 	}
