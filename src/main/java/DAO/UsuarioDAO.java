@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ public class UsuarioDAO extends DAO {
 		System.out.println("ele entra sim");
 		try {
 
-			String sql = "insert into usuario.usuario  (user_id, tipo_usuario, senha)" + "values(?,?,?)";
+			String sql = "insert into dbti2cc.usuario  (user_id, tipo_usuario, senha)" + "values(?,?,?)";
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setInt(1, usuario.getUserId());
 			stmt.setString(2, usuario.getTipoUsuario());
@@ -33,7 +33,7 @@ public class UsuarioDAO extends DAO {
 			stmt.close();
 
 			status = true;
-			System.out.println("deu erro não" + stmt);
+			System.out.println("deu erro nï¿½o" + stmt);
 		} catch (SQLException u) {
 			System.out.println("deu erro ao inserir dados na tabela mas n sei  " + u);
 
@@ -46,7 +46,7 @@ public class UsuarioDAO extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = st.executeQuery("SELECT * FROM usuario.usuario");
+			ResultSet rs = st.executeQuery("SELECT * FROM dbti2cc.usuario");
 			if (rs.next()) {
 				rs.last();
 				usuario = new Usuario[rs.getRow()];
@@ -68,7 +68,7 @@ public class UsuarioDAO extends DAO {
 
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM usuario.usuario WHERE id=" + id;
+			String sql = "SELECT * FROM dbti2cc.usuario WHERE user_id=" + id;
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
 				usuario = new Usuario(rs.getInt("user_id"), rs.getString("tipo_usuario"), rs.getString("senha"));
@@ -85,10 +85,11 @@ public class UsuarioDAO extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM usuario.usuario WHERE id = " + user_id);
+			st.executeUpdate("DELETE FROM dbti2cc.usuario WHERE user_id = " + user_id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {
+			System.out.println("execao delete " + u);
 			throw new RuntimeException(u);
 		}
 		return status;
@@ -98,8 +99,8 @@ public class UsuarioDAO extends DAO {
 		boolean status = false;
 		try {
 			Statement st = conexao.createStatement();
-			String sql = "UPDATE usuario.usuario SET senha = '" + usuario.getSenha() + "', tipoUsuario = '"
-					+ usuario.getTipoUsuario() + "', email = '" + " WHERE id = " + usuario.getUserId();
+			String sql = "UPDATE dbti2cc.usuario SET senha = '" + usuario.getSenha() + "', tipo_usuario = '"
+					+ usuario.getTipoUsuario() + "' WHERE user_id = " + usuario.getUserId();
 			st.executeUpdate(sql);
 			System.out.println("atualizado com sucesso " + st);
 			st.close();

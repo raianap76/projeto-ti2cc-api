@@ -12,10 +12,12 @@ import services.UsuarioService;
 
 public class SparkRestController {
 	public static void main(String[] args) {
-
+    
 		final UsuarioService usuarioService = new UsuarioService();
-		port(6787);
+		port(6788);
 		staticFiles.location("/public");
+		CorsFilter.enableCORS();
+	    
 		post("/usuario", (request, response) -> {
 			return usuarioService.addUsuario(request, response);
 		});
@@ -35,6 +37,5 @@ public class SparkRestController {
 		delete("/usuario/:id", (request, response) -> {
 			return usuarioService.deleteUsuario(request, response);
 		});
-
 	}
 }

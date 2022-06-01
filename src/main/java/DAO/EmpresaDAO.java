@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,7 +24,7 @@ public class EmpresaDAO extends DAO{
 		System.out.println("ele entra sim");
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("INSERT INTO empresa.empresa (id, nomeEmpresa, userid, cnpj, ramo, site, pais, estado, cidade, bairro, telefone, email) "
+			st.executeUpdate("INSERT INTO dbti2cc.empresa (id, nomeEmpresa, userid, cnpj, ramo, site, pais, estado, cidade, bairro, telefone, email) "
 		               + "VALUES ("+empresa.getId()+ ", '" + empresa.getNomeEmpresa() + "','" + empresa.getUserid() + "', '"  
 				       + empresa.getCnpj() + "', '" + empresa.getRamo() + "', '" + empresa.getSite() + "', '" 
 		               + empresa.getPais() + "', '" + empresa.getEstado() + "', '" + empresa.getCidade() + "', '" 
@@ -36,7 +36,7 @@ public class EmpresaDAO extends DAO{
 			
 			st.close();
 			status = true;
-			System.out.println("deu erro não" + st);
+			System.out.println("deu erro nï¿½o" + st);
 		} catch (SQLException u) {  
 			System.out.println("deu erro ao inserir dados na tabela mas n sei  "+ u);
 			
@@ -49,7 +49,7 @@ public class EmpresaDAO extends DAO{
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = st.executeQuery("SELECT * FROM empresa.empresa");		
+			ResultSet rs = st.executeQuery("SELECT * FROM dbti2cc.empresa");		
 	         if(rs.next()){
 	             rs.last();
 	             empresa = new Empresa[rs.getRow()];
@@ -73,7 +73,7 @@ public class EmpresaDAO extends DAO{
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			String sql = "SELECT * FROM empresa.empresa WHERE id="+id;
+			String sql = "SELECT * FROM dbti2cc.empresa WHERE id="+id;
 			ResultSet rs = st.executeQuery(sql);	
 	        if(rs.next()){            
 	        	empresa = new Empresa(rs.getInt("id"), rs.getString("nomeEmpresa"), rs.getString("userid"), rs.getInt("cnpj"), rs.getString("ramo"),
@@ -92,7 +92,7 @@ public class EmpresaDAO extends DAO{
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM empresa.empresa WHERE id = " + id);
+			st.executeUpdate("DELETE FROM dbti2cc.empresa WHERE id = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {  
@@ -105,7 +105,7 @@ public class EmpresaDAO extends DAO{
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			String sql = "UPDATE empresa.empresa SET nomeEmpresa = '" + empresa.getNomeEmpresa() + "', userid = '"  
+			String sql = "UPDATE dbti2cc.empresa SET nomeEmpresa = '" + empresa.getNomeEmpresa() + "', userid = '"  
 				       + empresa.getUserid() + "', cnpj = '" + empresa.getCnpj() + "', ramo = '" + empresa.getRamo() + "', site = '"
 				       + empresa.getSite() + "', pais = '" + empresa.getPais() + "', estado = '"
 				       + empresa.getEstado() + "', cidade = '" + empresa.getCidade() + "', bairro = '"

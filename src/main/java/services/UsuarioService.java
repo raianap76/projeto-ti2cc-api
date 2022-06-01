@@ -2,7 +2,7 @@ package services;
 
 import com.google.gson.Gson;
 
-import dao.UsuarioDAO;
+import DAO.UsuarioDAO;
 import error.UsuarioException;
 import model.Usuario;
 import response.StandardResponse;
@@ -21,11 +21,6 @@ public class UsuarioService {
 		// Employee employee = new Employee(emp.getId(), emp.getFirstName(),
 		// emp.getLastName(), emp.getEmail());
 		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "POST");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
-
 		Usuario usuario = new Gson().fromJson(request.body(), Usuario.class);
 		boolean status = usuarioDao.insert(usuario);
 		if (status == true) {
@@ -38,22 +33,14 @@ public class UsuarioService {
 
 	public String getUsuarios(Request request, Response response) {
 		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "GET");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
 		return new Gson()
 				.toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(usuarioDao.getUsuario())));
 
 	}
 
 	public String getUsuario(Request request, Response response) {
-		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "GET");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
 
+		response.type("application/json");
 		return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS,
 				new Gson().toJsonTree(usuarioDao.get(Integer.parseInt(request.params(":id"))))));
 
@@ -61,10 +48,6 @@ public class UsuarioService {
 
 	public String editUsuario(Request request, Response response) throws UsuarioException {
 		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "GET");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
 
 		Usuario forEdit = new Gson().fromJson(request.body(), Usuario.class);
 
@@ -74,7 +57,7 @@ public class UsuarioService {
 
 			if (toEdit == null)
 				return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
-						new Gson().toJson("Usuario não encontrado , preencha todos os campos!")));
+						new Gson().toJson("Usuario nï¿½o encontrado , preencha todos os campos!")));
 
 			if (forEdit.getTipoUsuario() != null) {
 				toEdit.setTipoUsuario(forEdit.getTipoUsuario());
@@ -99,18 +82,15 @@ public class UsuarioService {
 	public String deleteUsuario(Request request, Response response) {
 
 		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "GET");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
-
-		boolean delete = usuarioDao.delete(Integer.parseInt(request.params(":id")));
+		System.out.println(request.params(":id"));
+		System.out.println("eentrou no delete");
+		boolean delete = usuarioDao.delete(Integer.parseInt((request.params(":id"))));
 		if (delete) {
 			return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS, "usuario deletado com sucesso"));
 		} else {
 
 			return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
-					new Gson().toJson("Erro ao deletar , usuario não existe na base!")));
+					new Gson().toJson("Erro ao deletar , usuario nï¿½o existe na base!")));
 		}
 
 	}
