@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../css/records.css">
     <link rel="stylesheet" href="../../css/modal.css">
     <link rel="stylesheet" href="../../css/font-awesome/css/font-awesome.min.css" />
-    <script src="./experiencias.js" defer></script>
+    <script src="./candidato-vaga.js" defer></script>
     <title>CRUD</title>
 </head>
 
@@ -37,7 +37,7 @@
                 <div class="item">
                   <h3>Cadastro Perfil</h3>
                   <ul>
-                    <li><a href="./experiencias.html">Cadastro experiências</a></li>
+                    <li><a href="../experiencias/experiencias.html">Cadastro experiências</a></li>
                     <li><a href="#">Cadastro formações</a></li>
                     <li><a href="../certificacoes/certificacoes.html">Cadastro certificações</a></li>
                   </ul>
@@ -47,7 +47,7 @@
                   <h3>Cadastro Vagas</h3>
                   <ul>
                     <li><a href="../vagas/vaga.html">Cadastro vaga</a></li>
-                    <li><a href="../candidato-vaga/candidato-vaga.html">Cadastro canditado vaga</a></li>
+                    <li><a href="./candidato-vaga.html">Cadastro canditado vaga</a></li>
                     <li><a href="#">Cadastro posts</a></li>
                     <li><a href="#">Cadastro comentarios</a></li>
                   </ul>
@@ -66,23 +66,14 @@
         <!-- .container -->
       </nav>
     <main>
-        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar experiências</button>
+        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar candidato vaga</button>
         <table id="tableClient" class="records">
             <thead>
                 <tr>
                     <th>Ação</th>
-                    <th>User ID</th>
+                    <th>Empresa ID</th>
+                    <th>Vaga ID</th>
                     <th>Candidato ID</th>
-                    <th>Titulo</th>
-                    <th>Tipo Emprego</th>
-                    <th>Nome Empresa</th>
-                    <th>Localidade</th>
-                    <th>Data inicio</th>
-                    <th>Data Fim</th>
-                    <th>Setor</th>
-                    <th>Descrição</th>
-        
-                    
                 </tr>
             </thead>
             <tbody>
@@ -92,22 +83,14 @@
         <div class="modal" id="modal">
             <div class="modal-content">
                 <header class="modal-header">
-                    <h2>Nova experiência</h2>
+                    <h2>Cadastrar candidato em vaga</h2>
                     <span class="modal-close" id="modalClose">&#10006;</span>
                 </header>
                 <form id="form" class="modal-form">
-                    <input type="number" id="user_id" data-index="new" class="modal-field" placeholder="Id Usuario"
-                        required>
-                    <input type="number" id="candidato_id" class="modal-field" placeholder="Canditado ID" required>
-                    <input type="text" id="titulo" class="modal-field" placeholder="titulo" required>
-                    <input type="text" id="tipo_emprego" class="modal-field" placeholder="tipo emprego" required>
-                    <input type="text" id="nome_empresa" class="modal-field" placeholder="nome empresa" required>
-                    <input type="text" id="localidade" class="modal-field" placeholder="localidade" required>
-                    <input type="text" id="data_inicio" class="modal-field" placeholder="data inicio" required>
-                    <input type="text" id="data_fim" class="modal-field" placeholder="data fim" required>
-                    <input type="text" id="setor" class="modal-field" placeholder="setor" required>
-                    <input type="text" id="descricao" class="modal-field" placeholder="descricao" required>
-
+                   
+                    <input type="number" id="empresa_id" class="modal-field" placeholder="empresa ID" required>
+                    <input type="number" id="vaga_id" class="modal-field" placeholder="vaga id" required>
+                    <input type="number" id="candidato_id" class="modal-field" placeholder="candidato id" required>
                 </form>
                 <footer class="modal-footer">
                     <button id="salvar" class="button green">Salvar</button>

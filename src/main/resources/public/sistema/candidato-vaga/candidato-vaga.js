@@ -10,7 +10,7 @@ const closeModal = () => {
 
 // CRUD - create read update delete
 const deleteClient = (index) => {
-  let url = `http://localhost:6788/vaga/${index}`;
+  let url = `http://localhost:6788/candidatovaga/${index}`;
   let request = new XMLHttpRequest();
   request.open("DELETE", url, false);
   request.send();
@@ -29,7 +29,7 @@ const fazGet = (url) => {
   return request.responseText;
 };
 const readClient = () => {
-  let data = fazGet("http://localhost:6788/vaga");
+  let data = fazGet("http://localhost:6788/candidatovaga");
   console.log(data);
   let usuarios = JSON.parse(data);
   console.log(usuarios.data);
@@ -49,18 +49,14 @@ const clearFields = () => {
 
 const saveClient = () => {
   const client = {
-    user_id: document.getElementById("user_id").value,
-    vaga_id: document.getElementById("vaga_id").value,
     empresa_id: document.getElementById("empresa_id").value,
-    tipo: document.getElementById("tipo").value,
-    descricao: document.getElementById("descricao").value,
-    empresa: document.getElementById("empresa").value,
-
+    vaga_id: document.getElementById("vaga_id").value,
+    candidato_id: document.getElementById("candidato_id").value,
 
   };
   if (!openModalEditar) {
     if (isValidFields()) {
-      let url = "http://localhost:6788/vaga";
+      let url = "http://localhost:6788/candidatovaga";
       console.log("Body=", client);
       let request = new XMLHttpRequest();
       request.open("POST", url, true);
@@ -74,7 +70,7 @@ const saveClient = () => {
       console.log(request.responseText);
     }
   } else {
-    let url = `http://localhost:6788/candidato/${client.user_id}`;
+    let url = `http://localhost:6788/candidatovaga/${client.vaga_id}`;
     console.log("Body=", client);
     let request = new XMLHttpRequest();
     request.open("PUT", url, true);
@@ -96,12 +92,9 @@ const createRow = (client, index) => {
           <button type="button" class="button green" id="edit-${index}">Editar</button>
           <button type="button" class="button red" id="delete-${index}" >Excluir</button>
         </td>
-        <td>${client.user_id}</td>
-        <td>${client.vaga_id}</td>
         <td>${client.empresa_id}</td>
-        <td>${client.tipo}</td>
-        <td>${client.descricao}</td>
-        <td>${client.empresa}</td>
+        <td>${client.vaga_id}</td>
+        <td>${client.candidato_id}</td>
     `;
   document.querySelector("#tableClient>tbody").appendChild(newRow);
 };
@@ -120,12 +113,10 @@ const updateTable = () => {
 };
 
 const fillFields = (client) => {
-  document.getElementById("user_id").value = client.user_id;
-  document.getElementById("vaga_id").value = client.vaga_id;
   document.getElementById("empresa_id").value = client.empresa_id;
-  document.getElementById("tipo").value = client.tipo;
-  document.getElementById("descricao").value = client.descricao;
-  document.getElementById("empresa").value = client.empresa;
+  document.getElementById("vaga_id").value = client.vaga_id;
+  document.getElementById("candidato_id").value = client.candidato_id;
+
 };
 
 const editClient = (index) => {
@@ -147,7 +138,7 @@ const editDelete = (event) => {
       const client = readClient()[index];
       console.log(client);
       const response = confirm(
-        `Deseja realmente excluir a vaga ${client.vaga_id}`
+        `Deseja realmente excluir candidato vaga ${client.vaga_id}`
       );
       if (response) {
         deleteClient(client1.vaga_id);

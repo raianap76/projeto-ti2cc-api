@@ -10,7 +10,7 @@ const closeModal = () => {
 
 // CRUD - create read update delete
 const deleteClient = (index) => {
-  let url = `http://localhost:6788/vaga/${index}`;
+  let url = `http://localhost:6788/experiencias/${index}`;
   let request = new XMLHttpRequest();
   request.open("DELETE", url, false);
   request.send();
@@ -29,7 +29,7 @@ const fazGet = (url) => {
   return request.responseText;
 };
 const readClient = () => {
-  let data = fazGet("http://localhost:6788/vaga");
+  let data = fazGet("http://localhost:6788/experiencias");
   console.log(data);
   let usuarios = JSON.parse(data);
   console.log(usuarios.data);
@@ -50,17 +50,20 @@ const clearFields = () => {
 const saveClient = () => {
   const client = {
     user_id: document.getElementById("user_id").value,
-    vaga_id: document.getElementById("vaga_id").value,
-    empresa_id: document.getElementById("empresa_id").value,
-    tipo: document.getElementById("tipo").value,
+    candidato_id: document.getElementById("candidato_id").value,
+    titulo: document.getElementById("titulo").value,
+    tipo_emprego: document.getElementById("tipo_emprego").value,
+    nome_empresa: document.getElementById("nome_empresa").value,
+    localidade: document.getElementById("localidade").value,
+    data_inicio: document.getElementById("data_inicio").value,
+    data_fim: document.getElementById("data_fim").value,
+    setor: document.getElementById("setor").value,
     descricao: document.getElementById("descricao").value,
-    empresa: document.getElementById("empresa").value,
-
 
   };
   if (!openModalEditar) {
     if (isValidFields()) {
-      let url = "http://localhost:6788/vaga";
+      let url = "http://localhost:6788/experiencias";
       console.log("Body=", client);
       let request = new XMLHttpRequest();
       request.open("POST", url, true);
@@ -74,7 +77,7 @@ const saveClient = () => {
       console.log(request.responseText);
     }
   } else {
-    let url = `http://localhost:6788/candidato/${client.user_id}`;
+    let url = `http://localhost:6788/experiencias/${client.candidato_id}`;
     console.log("Body=", client);
     let request = new XMLHttpRequest();
     request.open("PUT", url, true);
@@ -89,6 +92,7 @@ const saveClient = () => {
     console.log(request.responseText);
   }
 };
+
 const createRow = (client, index) => {
   const newRow = document.createElement("tr");
   newRow.innerHTML = `
@@ -97,11 +101,15 @@ const createRow = (client, index) => {
           <button type="button" class="button red" id="delete-${index}" >Excluir</button>
         </td>
         <td>${client.user_id}</td>
-        <td>${client.vaga_id}</td>
-        <td>${client.empresa_id}</td>
-        <td>${client.tipo}</td>
+        <td>${client.candidato_id}</td>
+        <td>${client.titulo}</td>
+        <td>${client.tipo_emprego}</td>
+        <td>${client.nome_empresa}</td>
+        <td>${client.localidade}</td>
+        <td>${client.data_inicio}</td>
+        <td>${client.data_fim}</td>
+        <td>${client.setor}</td>
         <td>${client.descricao}</td>
-        <td>${client.empresa}</td>
     `;
   document.querySelector("#tableClient>tbody").appendChild(newRow);
 };
@@ -121,11 +129,16 @@ const updateTable = () => {
 
 const fillFields = (client) => {
   document.getElementById("user_id").value = client.user_id;
-  document.getElementById("vaga_id").value = client.vaga_id;
-  document.getElementById("empresa_id").value = client.empresa_id;
-  document.getElementById("tipo").value = client.tipo;
-  document.getElementById("descricao").value = client.descricao;
-  document.getElementById("empresa").value = client.empresa;
+  document.getElementById("candidato_id").value = client.empresa_id;
+  document.getElementById("titulo").value = client.cnpj;
+  document.getElementById("tipo_emprego").value = client.ramo;
+  document.getElementById("nome_empresa").value = client.site;
+  document.getElementById("localidade").value = client.pais;
+  document.getElementById("data_inicio").value = client.estado;
+  document.getElementById("data_fim").value = client.cidade;
+  document.getElementById("setor").value = client.bairro;
+  document.getElementById("descricao").value = client.telefone;
+
 };
 
 const editClient = (index) => {
@@ -147,10 +160,10 @@ const editDelete = (event) => {
       const client = readClient()[index];
       console.log(client);
       const response = confirm(
-        `Deseja realmente excluir a vaga ${client.vaga_id}`
+        `Deseja realmente excluir a experiencia ${client.empresa_id}`
       );
       if (response) {
-        deleteClient(client1.vaga_id);
+        deleteClient(client1.empresa_id);
         updateTable();
       }
     }

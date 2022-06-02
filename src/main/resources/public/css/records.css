@@ -1,10 +1,16 @@
+.overflow{
+    width: 100%;
+    overflow-x: scroll;
+}
 .records{
     width: 100%;
+    overflow-x: scroll;
     user-select: none;
     text-align: left;
 }
 
 .records th{
+    
     height: 50px;
     background-color: var(--primary-color);
     padding-left: 20px;
@@ -28,6 +34,7 @@
 
 @media(max-width:480px){
     .records{
+        
         border-spacing: 5px;
     }
     .records thead{
