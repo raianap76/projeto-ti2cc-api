@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../css/records.css">
     <link rel="stylesheet" href="../../css/modal.css">
     <link rel="stylesheet" href="../../css/font-awesome/css/font-awesome.min.css" />
-    <script src="./usuario.js" defer></script>
+    <script src="./vaga.js" defer></script>
     <title>CRUD</title>
 </head>
 
@@ -28,9 +28,9 @@
                 <div class="item">
                   <h3>Cadastro Identificação</h3>
                   <ul>
-                    <li><a href="./usuario.html">Cadastro usuario</a></li>
+                    <li><a href="../usuario/usuario.html">Cadastro usuario</a></li>
                     <li><a href="../empresa/empresa.html">Cadastro empresa</a></li>
-                    <li><a href="../candidato/candidato.html">Cadastro canditado</a></li>
+                    <li><a href="./candidato.html">Cadastro canditado</a></li>
                   </ul>
                 </div>
                 <!-- /.item -->
@@ -39,14 +39,14 @@
                   <ul>
                     <li><a href="../experiencias/experiencias.html">Cadastro experiências</a></li>
                     <li><a href="#">Cadastro formações</a></li>
-                    <li><a href="../certificacoes/certificacoes.html">Cadastro certificações</a></li>
+                    <li><a href="./certificacoes.html">Cadastro certificações</a></li>
                   </ul>
                 </div>
                 <!-- /.item -->
                 <div class="item">
                   <h3>Cadastro Vagas</h3>
                   <ul>
-                    <li><a href="../vagas/vaga.html">Cadastro vaga</a></li>
+                    <li><a href="./vaga.html">Cadastro vaga</a></li>
                     <li><a href="#">Cadastro canditado vaga</a></li>
                     <li><a href="#">Cadastro posts</a></li>
                     <li><a href="#">Cadastro comentarios</a></li>
@@ -66,14 +66,17 @@
         <!-- .container -->
       </nav>
     <main>
-        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar de usuarios</button>
+        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar vaga</button>
         <table id="tableClient" class="records">
             <thead>
                 <tr>
-                    <th>Usuario ID</th>
-                    <th>Tipo Usuario</th>
-                    <th>Senha</th>
                     <th>Ação</th>
+                    <th>Usuario ID</th>
+                    <th>Vaga ID</th>
+                    <th>Empresa ID</th>
+                    <th>Tipo</th>
+                    <th>Descricao</th>
+                    <th>Nome Empresa</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,14 +86,17 @@
         <div class="modal" id="modal">
             <div class="modal-content">
                 <header class="modal-header">
-                    <h2>Novo Usuario</h2>
+                    <h2>Nova vaga</h2>
                     <span class="modal-close" id="modalClose">&#10006;</span>
                 </header>
                 <form id="form" class="modal-form">
                     <input type="number" id="user_id" data-index="new" class="modal-field" placeholder="Id Usuario"
                         required>
-                    <input type="text" id="tipo_usuario" class="modal-field" placeholder="tipo usuario" required>
-                    <input type="text" id="senha" class="modal-field" placeholder="senha" required>
+                    <input type="number" id="vaga_id" class="modal-field" placeholder="vaga ID" required>
+                    <input type="number" id="empresa_id" class="modal-field" placeholder="empresa id" required>
+                    <input type="text" id="tipo" class="modal-field" placeholder="tipo" required>
+                    <input type="text" id="descricao" class="modal-field" placeholder="descricao" required>
+                    <input type="text" id="empresa" class="modal-field" placeholder="nome empresa" required>
                 </form>
                 <footer class="modal-footer">
                     <button id="salvar" class="button green">Salvar</button>

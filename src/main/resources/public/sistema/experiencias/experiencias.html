@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../css/records.css">
     <link rel="stylesheet" href="../../css/modal.css">
     <link rel="stylesheet" href="../../css/font-awesome/css/font-awesome.min.css" />
-    <script src="./usuario.js" defer></script>
+    <script src="./experiencias.js" defer></script>
     <title>CRUD</title>
 </head>
 
@@ -28,7 +28,7 @@
                 <div class="item">
                   <h3>Cadastro Identificação</h3>
                   <ul>
-                    <li><a href="./usuario.html">Cadastro usuario</a></li>
+                    <li><a href="../usuario/usuario.html">Cadastro usuario</a></li>
                     <li><a href="../empresa/empresa.html">Cadastro empresa</a></li>
                     <li><a href="../candidato/candidato.html">Cadastro canditado</a></li>
                   </ul>
@@ -37,7 +37,7 @@
                 <div class="item">
                   <h3>Cadastro Perfil</h3>
                   <ul>
-                    <li><a href="../experiencias/experiencias.html">Cadastro experiências</a></li>
+                    <li><a href="./experiencias.html">Cadastro experiências</a></li>
                     <li><a href="#">Cadastro formações</a></li>
                     <li><a href="../certificacoes/certificacoes.html">Cadastro certificações</a></li>
                   </ul>
@@ -66,14 +66,23 @@
         <!-- .container -->
       </nav>
     <main>
-        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar de usuarios</button>
+        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar experiências</button>
         <table id="tableClient" class="records">
             <thead>
                 <tr>
-                    <th>Usuario ID</th>
-                    <th>Tipo Usuario</th>
-                    <th>Senha</th>
                     <th>Ação</th>
+                    <th>User ID</th>
+                    <th>Candidato ID</th>
+                    <th>Titulo</th>
+                    <th>Tipo Emprego</th>
+                    <th>Nome Empresa</th>
+                    <th>Localidade</th>
+                    <th>Data inicio</th>
+                    <th>Data Fim</th>
+                    <th>Setor</th>
+                    <th>Descrição</th>
+        
+                    
                 </tr>
             </thead>
             <tbody>
@@ -83,14 +92,22 @@
         <div class="modal" id="modal">
             <div class="modal-content">
                 <header class="modal-header">
-                    <h2>Novo Usuario</h2>
+                    <h2>Nova experiência</h2>
                     <span class="modal-close" id="modalClose">&#10006;</span>
                 </header>
                 <form id="form" class="modal-form">
                     <input type="number" id="user_id" data-index="new" class="modal-field" placeholder="Id Usuario"
                         required>
-                    <input type="text" id="tipo_usuario" class="modal-field" placeholder="tipo usuario" required>
-                    <input type="text" id="senha" class="modal-field" placeholder="senha" required>
+                    <input type="number" id="candidato_id" class="modal-field" placeholder="Canditado ID" required>
+                    <input type="text" id="titulo" class="modal-field" placeholder="titulo" required>
+                    <input type="text" id="tipo_emprego" class="modal-field" placeholder="tipo emprego" required>
+                    <input type="text" id="nome_empresa" class="modal-field" placeholder="nome empresa" required>
+                    <input type="text" id="localidade" class="modal-field" placeholder="localidade" required>
+                    <input type="text" id="data_inicio" class="modal-field" placeholder="data inicio" required>
+                    <input type="text" id="data_fim" class="modal-field" placeholder="data fim" required>
+                    <input type="text" id="setor" class="modal-field" placeholder="setor" required>
+                    <input type="text" id="descricao" class="modal-field" placeholder="descricao" required>
+
                 </form>
                 <footer class="modal-footer">
                     <button id="salvar" class="button green">Salvar</button>

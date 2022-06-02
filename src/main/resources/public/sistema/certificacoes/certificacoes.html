@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../css/records.css">
     <link rel="stylesheet" href="../../css/modal.css">
     <link rel="stylesheet" href="../../css/font-awesome/css/font-awesome.min.css" />
-    <script src="./usuario.js" defer></script>
+    <script src="./certificacoes.js" defer></script>
     <title>CRUD</title>
 </head>
 
@@ -28,7 +28,7 @@
                 <div class="item">
                   <h3>Cadastro Identificação</h3>
                   <ul>
-                    <li><a href="./usuario.html">Cadastro usuario</a></li>
+                    <li><a href="../usuario/usuario.html">Cadastro usuario</a></li>
                     <li><a href="../empresa/empresa.html">Cadastro empresa</a></li>
                     <li><a href="../candidato/candidato.html">Cadastro canditado</a></li>
                   </ul>
@@ -39,7 +39,7 @@
                   <ul>
                     <li><a href="../experiencias/experiencias.html">Cadastro experiências</a></li>
                     <li><a href="#">Cadastro formações</a></li>
-                    <li><a href="../certificacoes/certificacoes.html">Cadastro certificações</a></li>
+                    <li><a href="./certificacoes.html">Cadastro certificações</a></li>
                   </ul>
                 </div>
                 <!-- /.item -->
@@ -66,14 +66,17 @@
         <!-- .container -->
       </nav>
     <main>
-        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar de usuarios</button>
+        <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar certificação</button>
         <table id="tableClient" class="records">
             <thead>
                 <tr>
-                    <th>Usuario ID</th>
-                    <th>Tipo Usuario</th>
-                    <th>Senha</th>
                     <th>Ação</th>
+                    <th>Usuario ID</th>
+                    <th>Candidato ID</th>
+                    <th>titulo</th>
+                    <th>Orgão Emissor</th>
+                    <th>URL Credenical</th>
+                    <th>Credencial</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,14 +86,17 @@
         <div class="modal" id="modal">
             <div class="modal-content">
                 <header class="modal-header">
-                    <h2>Novo Usuario</h2>
+                    <h2>Novo certificado</h2>
                     <span class="modal-close" id="modalClose">&#10006;</span>
                 </header>
                 <form id="form" class="modal-form">
                     <input type="number" id="user_id" data-index="new" class="modal-field" placeholder="Id Usuario"
                         required>
-                    <input type="text" id="tipo_usuario" class="modal-field" placeholder="tipo usuario" required>
-                    <input type="text" id="senha" class="modal-field" placeholder="senha" required>
+                    <input type="number" id="candidato_id" class="modal-field" placeholder="candidato ID" required>
+                    <input type="text" id="titulo" class="modal-field" placeholder="titulo" required>
+                    <input type="text" id="org_emissor" class="modal-field" placeholder="orgão emissor" required>
+                    <input type="text" id="url_credenical" class="modal-field" placeholder="url credencial" required>
+                    <input type="text" id="credencial" class="modal-field" placeholder="credencial" required>
                 </form>
                 <footer class="modal-footer">
                     <button id="salvar" class="button green">Salvar</button>
