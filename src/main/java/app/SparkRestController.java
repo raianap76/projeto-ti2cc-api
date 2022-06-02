@@ -7,6 +7,7 @@ import static spark.Spark.post;
 import static spark.Spark.put;
 import static spark.Spark.staticFiles;
 
+import services.SistemaInteligenteService;
 import services.UsuarioService;
 
 
@@ -14,6 +15,7 @@ public class SparkRestController {
 	public static void main(String[] args) {
     
 		final UsuarioService usuarioService = new UsuarioService();
+		final SistemaInteligenteService sistemaInteligenteService = new SistemaInteligenteService();
 		port(6788);
 		staticFiles.location("/public");
 		CorsFilter.enableCORS();
@@ -37,5 +39,10 @@ public class SparkRestController {
 		delete("/usuario/:id", (request, response) -> {
 			return usuarioService.deleteUsuario(request, response);
 		});
+		get("/sistemaInteligente", (request, response) -> {
+			return sistemaInteligenteService.treinaModelo();
+		});
 	}
+	
+	
 }
