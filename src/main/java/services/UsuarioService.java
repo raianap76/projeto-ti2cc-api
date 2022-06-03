@@ -3,7 +3,7 @@ package services;
 import com.google.gson.Gson;
 
 import DAO.UsuarioDAO;
-import error.UsuarioException;
+import error.GeneralException;
 import model.Usuario;
 import response.StandardResponse;
 import response.StatusResponse;
@@ -46,7 +46,7 @@ public class UsuarioService {
 
 	}
 
-	public String editUsuario(Request request, Response response) throws UsuarioException {
+	public String editUsuario(Request request, Response response) throws GeneralException {
 		response.type("application/json");
 
 		Usuario forEdit = new Gson().fromJson(request.body(), Usuario.class);
