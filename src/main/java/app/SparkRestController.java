@@ -7,6 +7,7 @@ import static spark.Spark.post;
 import static spark.Spark.put;
 import static spark.Spark.staticFiles;
 
+import response.CorsFilter;
 import services.VagasService;
 import services.EmpresaService;
 import services.ExperienciasService;

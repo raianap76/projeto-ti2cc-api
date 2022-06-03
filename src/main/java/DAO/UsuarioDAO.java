@@ -1,5 +1,7 @@
 package DAO;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +20,17 @@ public class UsuarioDAO extends DAO {
 		close();
 	}
 
-	public boolean insert(Usuario usuario) {
+	public String criptografica(String senha ) throws Exception {
+		String s = senha;
+		MessageDigest m = MessageDigest.getInstance("MD5");
+		m.update(s.getBytes(), 0, s.length());
+		System.out.println("Texto Original: " + s);
+		s = new BigInteger(1, m.digest()).toString(16);
+		System.out.println("Texto Criptografado: " + new BigInteger(1, m.digest()).toString(16));
+		return s;
+	}
+
+	public boolean insert(Usuario usuario) throws Exception{
 		boolean status = false;
 		System.out.println("ele entra sim");
 		try {
@@ -27,7 +39,7 @@ public class UsuarioDAO extends DAO {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setInt(1, usuario.getUserId());
 			stmt.setString(2, usuario.getTipoUsuario());
-			stmt.setString(3, usuario.getSenha());
+			stmt.setString(3, criptografica(usuario.getSenha()));
 
 			stmt.execute();
 			stmt.close();

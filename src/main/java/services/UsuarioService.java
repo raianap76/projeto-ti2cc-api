@@ -17,7 +17,7 @@ public class UsuarioService {
 		System.out.print(emp);
 	}
 
-	public String addUsuario(Request request, Response response) {
+	public String addUsuario(Request request, Response response) throws Exception {
 		// Employee employee = new Employee(emp.getId(), emp.getFirstName(),
 		// emp.getLastName(), emp.getEmail());
 		response.type("application/json");
