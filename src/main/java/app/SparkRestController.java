@@ -9,6 +9,7 @@ import static spark.Spark.staticFiles;
 
 import services.VagasService;
 import services.EmpresaService;
+import services.ExperienciasService;
 import services.CertificacoesService;
 import services.SistemaInteligenteService;
 import services.UsuarioService;
@@ -22,6 +23,7 @@ public class SparkRestController {
 		final CertificacoesService certificacoesService = new CertificacoesService();
 		final EmpresaService empresaService = new EmpresaService();
 		final VagasService vagasService = new VagasService();
+		final ExperienciasService experienciasService = new ExperienciasService();
 		port(6788);
 		staticFiles.location("/public");
 		CorsFilter.enableCORS();
@@ -107,6 +109,26 @@ public class SparkRestController {
 
 		delete("/vagas/:id", (request, response) -> {
 			return vagasService.deleteVagas(request, response);
+		});
+		
+		post("/experiencias", (request, response) -> {
+			return experienciasService.addExperiencias(request, response);
+		});
+
+		get("/experiencias", (request, response) -> {
+			return experienciasService.getExperiencia(request, response);
+		});
+
+		get("/experiencias/:id", (request, response) -> {
+            return experienciasService.getExperiencias(request, response);
+		});
+
+		put("/experiencias/:id", (request, response) -> {
+            return experienciasService.editExperiencias(request, response);
+		});
+
+		delete("/experiencias/:id", (request, response) -> {
+			return experienciasService.deleteExperiencias(request, response);
 		});
 
 
