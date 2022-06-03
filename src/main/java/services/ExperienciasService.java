@@ -34,7 +34,7 @@ public class ExperienciasService {
 	}
 	
 	public String getExperiencias(Request request, Response response) {
-	
+		response.type("application/json");
 		return new Gson()
 				.toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(experienciasDao.getExperiencias())));
 
@@ -42,14 +42,14 @@ public class ExperienciasService {
 	
 	public String getExperiencia(Request request, Response response) {
 	
-
+		response.type("application/json");
 		return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS,
 				new Gson().toJsonTree(experienciasDao.get(Integer.parseInt(request.params(":id"))))));
 
 	}
 	
 	public String editExperiencias(Request request, Response response) throws GeneralException {
-	
+		response.type("application/json");
 
 		Experiencias forEdit = new Gson().fromJson(request.body(), Experiencias.class);
 
@@ -100,6 +100,8 @@ public class ExperienciasService {
 	}
 	
 	public String deleteExperiencias(Request request, Response response) {
+
+		response.type("application/json");
 
 
 		boolean delete = experienciasDao.delete(Integer.parseInt(request.params(":id")));
