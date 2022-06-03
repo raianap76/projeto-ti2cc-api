@@ -21,11 +21,7 @@ public class ExperienciasService {
 	public String addExperiencias(Request request, Response response) {
 		// Employee employee = new Employee(emp.getId(), emp.getFirstName(),
 		// emp.getLastName(), emp.getEmail());
-		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "POST");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+
 
 		Experiencias experiencias = new Gson().fromJson(request.body(), Experiencias.class);
 		boolean status = experienciasDao.insert(experiencias);
@@ -38,22 +34,14 @@ public class ExperienciasService {
 	}
 	
 	public String getExperiencias(Request request, Response response) {
-		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "GET");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+	
 		return new Gson()
 				.toJson(new StandardResponse(StatusResponse.SUCCESS, new Gson().toJsonTree(experienciasDao.getExperiencias())));
 
 	}
 	
 	public String getExperiencia(Request request, Response response) {
-		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "GET");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+	
 
 		return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS,
 				new Gson().toJsonTree(experienciasDao.get(Integer.parseInt(request.params(":id"))))));
@@ -61,11 +49,7 @@ public class ExperienciasService {
 	}
 	
 	public String editExperiencias(Request request, Response response) throws GeneralException {
-		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "GET");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
+	
 
 		Experiencias forEdit = new Gson().fromJson(request.body(), Experiencias.class);
 
@@ -75,7 +59,7 @@ public class ExperienciasService {
 
 			if (toEdit == null)
 				return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
-						new Gson().toJson("Certificacao não encontrada , preencha todos os campos!")));
+						new Gson().toJson("Certificacao nï¿½o encontrada , preencha todos os campos!")));
 
 			if (forEdit.getTitulo() != null) {
 				toEdit.setTitulo(forEdit.getTitulo());
@@ -117,11 +101,6 @@ public class ExperienciasService {
 	
 	public String deleteExperiencias(Request request, Response response) {
 
-		response.type("application/json");
-		response.header("Access-Control-Allow-Origin", "*");
-		response.header("Access-Control-Allow-Methods", "GET");
-		response.header("Access-Control-Allow-Headers",
-				"Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
 
 		boolean delete = experienciasDao.delete(Integer.parseInt(request.params(":id")));
 		if (delete) {
@@ -129,7 +108,7 @@ public class ExperienciasService {
 		} else {
 
 			return new Gson().toJson(new StandardResponse(StatusResponse.ERROR,
-					new Gson().toJson("Erro ao deletar , experiencia não existe na base!")));
+					new Gson().toJson("Erro ao deletar , experiencia nï¿½o existe na base!")));
 		}
 
 	}

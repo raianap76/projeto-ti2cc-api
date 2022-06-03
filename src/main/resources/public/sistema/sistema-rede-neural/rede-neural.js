@@ -15,7 +15,7 @@ const fazGet = (url) => {
   return request.responseText;
 };
 const readClient = () => {
-  let data = fazGet("http://localhost:6788/sistemaInteligente");
+  let data = fazGet("http://localhost:6789/sistemaInteligente");
   console.log(data);
   let usuarios = JSON.parse(data);
   usuarios = JSON.parse(usuarios.data)

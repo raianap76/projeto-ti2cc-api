@@ -10,7 +10,7 @@ const closeModal = () => {
 
 // CRUD - create read update delete
 const deleteClient = (index) => {
-  let url = `http://localhost:6788/vaga/${index}`;
+  let url = `http://localhost:6789/vaga/${index}`;
   let request = new XMLHttpRequest();
   request.open("DELETE", url, false);
   request.send();
@@ -29,7 +29,7 @@ const fazGet = (url) => {
   return request.responseText;
 };
 const readClient = () => {
-  let data = fazGet("http://localhost:6788/vaga");
+  let data = fazGet("http://localhost:6789/vaga");
   console.log(data);
   let usuarios = JSON.parse(data);
   console.log(usuarios.data);
@@ -60,7 +60,7 @@ const saveClient = () => {
   };
   if (!openModalEditar) {
     if (isValidFields()) {
-      let url = "http://localhost:6788/vaga";
+      let url = "http://localhost:6789/vaga";
       console.log("Body=", client);
       let request = new XMLHttpRequest();
       request.open("POST", url, true);
@@ -74,7 +74,7 @@ const saveClient = () => {
       console.log(request.responseText);
     }
   } else {
-    let url = `http://localhost:6788/candidato/${client.user_id}`;
+    let url = `http://localhost:6789/candidato/${client.user_id}`;
     console.log("Body=", client);
     let request = new XMLHttpRequest();
     request.open("PUT", url, true);

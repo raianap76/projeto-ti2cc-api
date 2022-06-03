@@ -10,7 +10,7 @@ const closeModal = () => {
 
 // CRUD - create read update delete
 const deleteClient = (index) => {
-  let url = `http://localhost:6788/usuario/${index}`;
+  let url = `http://localhost:6789/usuario/${index}`;
   let request = new XMLHttpRequest();
   request.open("DELETE", url, false);
   request.send();
@@ -31,7 +31,7 @@ const fazGet = (url) => {
   return request.responseText;
 };
 const readClient = () => {
-  let data = fazGet("http://localhost:6788/usuario");
+  let data = fazGet("http://localhost:6789/usuario");
   console.log(data);
   let usuarios = JSON.parse(data);
   console.log(usuarios.data);
@@ -58,7 +58,7 @@ const saveClient = () => {
         tipo_usuario: document.getElementById("tipo_usuario").value,
         senha: document.getElementById("senha").value,
       };
-      let url = "http://localhost:6788/usuario";
+      let url = "http://localhost:6789/usuario";
       console.log("Body=", client);
       let request = new XMLHttpRequest();
       request.open("POST", url, true);
@@ -77,7 +77,7 @@ const saveClient = () => {
       tipo_usuario: document.getElementById("tipo_usuario").value,
       senha: document.getElementById("senha").value,
     };
-    let url = `http://localhost:6788/usuario/${client.user_id}`;
+    let url = `http://localhost:6789/usuario/${client.user_id}`;
     console.log("Body=", client);
     let request = new XMLHttpRequest();
     request.open("PUT", url, true);

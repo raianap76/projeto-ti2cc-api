@@ -25,7 +25,7 @@ public class SparkRestController {
 		final EmpresaService empresaService = new EmpresaService();
 		final VagasService vagasService = new VagasService();
 		final ExperienciasService experienciasService = new ExperienciasService();
-		port(6788);
+		port(6789);
 		staticFiles.location("/public");
 		CorsFilter.enableCORS();
 	    
